@@ -1,0 +1,14 @@
+.env
+coverage.out
+*.txt
+*/*.txt
+
+.vscode
+.vscode/*
+.DS_Store
+*/.DS_Store
+
+#.idea files
+.idea
+.idea/
+.idea/*

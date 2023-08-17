@@ -1,0 +1,64 @@
+package controllers
+
+import (
+	"net/http"
+
+	"github.com/go-chi/chi/v5"
+)
+
+const ApiSector = "healthcare" // "healthcare", "veterinary", "insurance" ...
+
+type Route struct {
+	Method  string
+	Url     string
+	Handler http.HandlerFunc
+}
+
+func CreateRouter() *chi.Mux {
+	r := chi.NewRouter()
+
+	routes := []Route{
+		{
+			Method:  "POST",
+			Url:     "/{tenantAlternateName}/cds-{territory}/{apiVersion}/{sector}/{specification}/connection/{connectionId}",
+			Handler: HandlePostPrimaryDocToStore, // Changed to HandlePostPrimaryDocToVaultEDV
+		},
+	}
+
+	for _, route := range routes {
+		switch route.Method {
+		case "POST":
+			r.Post(route.Url, route.Handler)
+		case "GET":
+			r.Get(route.Url, route.Handler)
+			// Add more HTTP methods as needed...
+		}
+	}
+
+	return r
+}
+
+/*
+func unsupportedSpecHandler(w http.ResponseWriter, r *http.Request) {
+	var status = "400"
+	var code = "400"
+	var title = "Unsupported Specification"
+	var detail = "The requested specification is not supported."
+
+	primaryDoc := &didcommUtils.PrimaryDocument{
+		Data: []didcommUtils.ResourceObject{},
+		Errors: &[]didcommUtils.ErrorObject{
+			didcommUtils.ErrorObject{
+				Status: &status,
+				Code:   &code,
+				Title:  &title,
+				Detail: &detail,
+			},
+		},
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusBadRequest)
+	json.NewEncoder(w).Encode(primaryDoc)
+}
+*/
