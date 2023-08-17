@@ -8,6 +8,10 @@ import (
 
 const ApiSector = "healthcare" // "healthcare", "veterinary", "insurance" ...
 
+// Supported content types and accepts
+var supportedContentTypes = []string{"json", "jwt", "jwm", "didcomm"}
+var supportedAccepts = append(supportedContentTypes) // Add any other accept types if required.
+
 type Route struct {
 	Method  string
 	Url     string

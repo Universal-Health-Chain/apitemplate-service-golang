@@ -8,7 +8,7 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
-func ManagePostPrimaryDocToVaultEDV(r *http.Request) (didcommUtils.PrimaryDocument, error) {
+var ManagePostPrimaryDocToVaultEDV = func(r *http.Request) (didcommUtils.PrimaryDocument, error) {
 	tenantAlternateName := chi.URLParam(r, "tenantAlternateName")
 	vaultId := chi.URLParam(r, "vaultId")
 
