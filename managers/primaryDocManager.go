@@ -9,7 +9,7 @@ import (
 )
 
 var ManagePostPrimaryDocToVaultEDV = func(r *http.Request) (didcommUtils.PrimaryDocument, error) {
-	tenantAlternateName := chi.URLParam(r, "tenantAlternateName")
+	vaultAlternateName := chi.URLParam(r, "vaultAlternateName")
 	vaultId := chi.URLParam(r, "vaultId")
 
 	decodedRequest, errMsg := httpUtils.DecodeHeadersAndBodyHTTP(r)
@@ -25,7 +25,7 @@ var ManagePostPrimaryDocToVaultEDV = func(r *http.Request) (didcommUtils.Primary
 
 	// Directly using decodedRequest.Body, since it's already of type didcommUtils.PrimaryDocument
 	primaryDoc := decodedRequest.Body
-	storedResourceObjects, errorObjects := StoreManyResourceObjects(&primaryDoc.Data, tenantAlternateName, vaultId)
+	storedResourceObjects, errorObjects := StoreManyResourceObjects(&primaryDoc.Data, vaultAlternateName, vaultId)
 
 	return didcommUtils.PrimaryDocument{
 		Data:   storedResourceObjects,

@@ -3,8 +3,7 @@ package main
 import (
 	controllers "apitemplate-service-golang/controllers"
 	"apitemplate-service-golang/utils/envUtils"
-	"apitemplate-service-golang/utils/storageHostUtils"
-	"apitemplate-service-golang/utils/storageProviderUtils"
+	"apitemplate-service-golang/utils/storageService"
 	"fmt"
 	"io"
 	"log"
@@ -12,9 +11,9 @@ import (
 	"os"
 	"time"
 
+	"github.com/Universal-Health-Chain/common-utils-golang/storageUtils"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
-	storageProvider "github.com/trustbloc/edv/pkg/edvprovider/memedvprovider"
 )
 
 // Note: the main function or test functions have to call envUtils.LoadEnv()
@@ -25,8 +24,8 @@ const (
 )
 
 var (
-	serviceName = "apitemplate-service-golang"
-	logPath     = "./logs/" // instead of the root "/"
+	serviceName = os.Getenv("HOST_DB_NAME") // underscore instead of hyppen
+	logPath     = "./logs/"                 // instead of the root "/"
 	startTime   = fmt.Sprint(time.Now().Unix())
 	logFile     = logPath + serviceName + "_" + startTime + ".txt"
 	Logger      *log.Logger
@@ -45,7 +44,25 @@ func main() {
 	initHostKeys()
 
 	// 3) Connecting to the host's storage
-	storageProviderUtils.SetHostProviderMem(storageProvider.NewProvider())
+	hostStorageParams := storageUtils.StorageParameters{
+		StorageType:   storageUtils.DatabaseTypeMemOption,
+		StorageURL:    "", // Empty for memory storage
+		StoragePrefix: "prefix",
+	}
+	manager := &storageService.StorageServicesManager{}
+	err := manager.CreateStorageService("host", hostStorageParams, 5)
+	if err != nil {
+		fmt.Println("Error creating storage service:", err)
+		return
+	}
+
+	service, err := manager.GetStorageServiceByAlternateName("host")
+	if err != nil {
+		fmt.Println("Error getting storage service:", err)
+		return
+	}
+
+	fmt.Println("Successfully retrieved storage service with alternate name:", service.GetAlternateName())
 
 	// 4) Initializing the router
 	envUtils.LoadEnv()
@@ -79,6 +96,6 @@ func InitLogger() {
 }
 
 func initHostKeys() {
-	storageHostUtils.InitHostDEK([]byte(os.Getenv(envHostDEK)))
-	storageHostUtils.InitHostHMAC([]byte(os.Getenv(envHostHMAC)))
+	storageService.InitHostDEK([]byte(os.Getenv(envHostDEK)))
+	storageService.InitHostHMAC([]byte(os.Getenv(envHostHMAC)))
 }

@@ -8,10 +8,10 @@ import (
 var inMemoryStore = make(map[string][]didcommUtils.ResourceObject)
 
 // Mocked function to store many message resource objects in memory.
-func StoreManyResourceObjects(data *[]didcommUtils.ResourceObject, tenantAlternateName string, vaultId string) ([]didcommUtils.ResourceObject, *[]didcommUtils.ErrorObject) {
-	key := tenantAlternateName + "_" + vaultId
+func StoreManyResourceObjects(data *[]didcommUtils.ResourceObject, vaultAlternateName string, vaultId string) ([]didcommUtils.ResourceObject, *[]didcommUtils.ErrorObject) {
+	key := vaultAlternateName + "_" + vaultId
 
-	// Check if a slice already exists for this tenantAlternateName and vaultId
+	// Check if a slice already exists for this vaultAlternateName and vaultId
 	if existingData, ok := inMemoryStore[key]; ok {
 		// Append to the existing slice if it's already there
 		existingData = append(existingData, *data...)
@@ -29,8 +29,8 @@ func StoreManyResourceObjects(data *[]didcommUtils.ResourceObject, tenantAlterna
 }
 
 // A utility function for testing purposes to retrieve stored data in memory
-func GetStoredData(tenantAlternateName string, vaultId string) []didcommUtils.ResourceObject {
-	key := tenantAlternateName + "_" + vaultId
+func GetStoredData(vaultAlternateName string, vaultId string) []didcommUtils.ResourceObject {
+	key := vaultAlternateName + "_" + vaultId
 	if data, ok := inMemoryStore[key]; ok {
 		return data
 	}

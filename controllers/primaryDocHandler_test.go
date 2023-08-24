@@ -20,7 +20,7 @@ func mockManagePostPrimaryDocToVaultEDV(r *http.Request) (didcommUtils.PrimaryDo
 	return didcommUtils.PrimaryDocument{
 		/*... Some mock data ...*/
 		Data: []didcommUtils.ResourceObject{
-			{IdHashed: &resourceObjectHashedId, Type: "test-type"},
+			{IdHashed: resourceObjectHashedId, Type: "test-type"},
 		},
 	}, nil
 }

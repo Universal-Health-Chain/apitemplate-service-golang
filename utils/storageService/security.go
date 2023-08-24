@@ -1,4 +1,4 @@
-package storageHostUtils
+package storageService
 
 import (
 	"crypto/aes"

@@ -24,7 +24,7 @@ func CreateRouter() *chi.Mux {
 	routes := []Route{
 		{
 			Method:  "POST",
-			Url:     "/{tenantAlternateName}/cds-{territory}/{apiVersion}/{sector}/{specification}/connection/{connectionId}",
+			Url:     "/{vaultAlternateName}/cds-{territory}/{apiVersion}/{sector}/{specification}/connection/{connectionId}",
 			Handler: HandlePostPrimaryDocToStore, // Changed to HandlePostPrimaryDocToVaultEDV
 		},
 	}
