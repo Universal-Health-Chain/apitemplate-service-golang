@@ -8,10 +8,6 @@ github.com/Microsoft/go-winio v0.4.14/go.mod h1:qXqCSQ3Xa7+6tgxaGTIe4Kpcdsi+P8jB
 github.com/Nvveen/Gotty v0.0.0-20120604004816-cd527374f1e5 h1:TngWCqHvy9oXAN6lEVMRuU21PR1EtLVZJmdB18Gu3Rw=
 github.com/Nvveen/Gotty v0.0.0-20120604004816-cd527374f1e5/go.mod h1:lmUJ/7eu/Q8D7ML55dXQrVaamCz2vxCfdQBasLZfHKk=
 github.com/OneOfOne/xxhash v1.2.2/go.mod h1:HSdplMjZKSmBqAxg5vPj2TmRDmfkzw+cTzAElWljhcU=
-github.com/Universal-Health-Chain/common-utils-golang v1.0.4 h1:UlrLmHVjLNfucb2ABB55jGAEaNMMGzD865lgnyYaRwY=
-github.com/Universal-Health-Chain/common-utils-golang v1.0.4/go.mod h1:hl+SuXDvxsalSgtsZRV5lJf+9SLe3Nz8RMmMrw61N90=
-github.com/Universal-Health-Chain/common-utils-golang v1.0.5 h1:hzsa8kPD0wqUi/aLVoq/f1uzjEjMdSKTELuNcH3B17Y=
-github.com/Universal-Health-Chain/common-utils-golang v1.0.5/go.mod h1:uPwfFYusT1zNpG4D6Fx/XX7o65lY1J0L++PtbXI784A=
 github.com/Universal-Health-Chain/common-utils-golang v1.0.6 h1:Gk/50ui9WxcEHjZ3yA/OP6MZqFIzdSwUyR9oD6rJSO4=
 github.com/Universal-Health-Chain/common-utils-golang v1.0.6/go.mod h1:mUmHqiWBUWRB4DdSeLoQyfmPy+GHN2aNjnj+xGOKEPs=
 github.com/aead/siphash v1.0.1/go.mod h1:Nywa3cDsYNNK3gaciGTWPwHt0wlpNV15vwmswBAUSII=
@@ -129,8 +125,6 @@ github.com/hyperledger/aries-framework-go-ext/component/storage/couchdb v0.0.0-2
 github.com/hyperledger/aries-framework-go-ext/component/storage/couchdb v0.0.0-20230622181036-ef011d8df3d5/go.mod h1:q8qjsQpYo7AYG0pqQg1zgEoIVc+Hrpf5S0WciiwPDQA=
 github.com/hyperledger/aries-framework-go-ext/component/storage/mongodb v0.0.0-20230622181036-ef011d8df3d5 h1:jCxDTrjrG7zCyIwqQ6hMpsAqaE+zH8VGEJvyHHPIJyo=
 github.com/hyperledger/aries-framework-go-ext/component/storage/mongodb v0.0.0-20230622181036-ef011d8df3d5/go.mod h1:GDANCnJONcCqBvv6QgKuk5Y2FWHyD/Hu26kyc7NTyfY=
-github.com/hyperledger/aries-framework-go/component/storageutil v0.0.0-20230822161205-69119012ed5c h1:BPbfoOuHtzJpDX2bOm4I35NgBYXSVmpUyYY+acctoNo=
-github.com/hyperledger/aries-framework-go/component/storageutil v0.0.0-20230822161205-69119012ed5c/go.mod h1:oRpwhRd6024hiYqBVL9GtjfutHh3qIqOK7ZExk9uI6c=
 github.com/hyperledger/aries-framework-go/component/storageutil v0.0.0-20230823143713-917ccf5c8cd2 h1:73iq5FFswCZR1STAHijwuRRgn9FC0XFO8P2tbVmmXDo=
 github.com/hyperledger/aries-framework-go/component/storageutil v0.0.0-20230823143713-917ccf5c8cd2/go.mod h1:oRpwhRd6024hiYqBVL9GtjfutHh3qIqOK7ZExk9uI6c=
 github.com/hyperledger/aries-framework-go/spi v0.0.0-20230815195733-cce322df1e8f h1:CNS/hZtkCI9aaumDpbyJ0OtF4rtc+29IzFbI3+6Pr8g=
