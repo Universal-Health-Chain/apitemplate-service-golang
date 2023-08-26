@@ -6,7 +6,7 @@
 # Dockerfile References: https://docs.docker.com/engine/reference/builder/
 
 # Using the last version
-FROM golang:alpine
+FROM golang:1.21 AS builder
 
 # Add Maintainer Info
 
@@ -20,10 +20,19 @@ WORKDIR /app
 COPY . .
 
 # Build the Go app
-RUN go build -o main .
+RUN go build -o docs-service
+
+# Use a Docker multi-stage build to create a lean production image.
+# https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
+FROM debian:12-slim
+
+# Copy the binary to the production image from the builder stage.
+COPY --from=builder /app/docs-service /docs-service
 
 # Expose port 8024 to the outside world
 EXPOSE 8024
 
+VOLUME [ "/logs" ]
+
 # Command to run the executable
-CMD ["./main"]
+CMD ["/docs-service"]
