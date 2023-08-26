@@ -1,7 +1,7 @@
 package testData
 
-// Org1 data is stored in another Storage Provider using the external Mongo Service DB specified
-var TestResourceObjectStringifiedToInit = `{
+// Org1 data is stored using the external Mongo Service DB specified, distinct to the Host's Storage
+var TestResourceObjectStringifiedToInitStorage1 = `{
 	"type": "Organization",
     "attributes": {
         "@type": "Organization",
@@ -14,7 +14,6 @@ var TestResourceObjectStringifiedToInit = `{
             "@type": "Service",
             "additionalType": "org.mongodb",
             "identifier": "urn:uuid:<organization-uuid-v4>",
-            "name": "dbConnectionsVault1",
             "alternateName": "` + TestAlternateNameValue1 + `",
             "url": "` + TestConnStrServiceProviderMongo1 + `"
         }
@@ -22,7 +21,7 @@ var TestResourceObjectStringifiedToInit = `{
 }`
 
 // Org2 data is stored in a Host's private storage because no external Service DB is provided
-var TestResourceObjectStringifiedForInitializingVault2 = `{
+var TestResourceObjectStringifiedToInitStorage2 = `{
 	"type": "Organization",
     "attributes": {
         "@type": "Organization",

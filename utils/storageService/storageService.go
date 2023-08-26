@@ -1,6 +1,7 @@
 package storageService
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/Universal-Health-Chain/common-utils-golang/storageUtils"
@@ -49,10 +50,51 @@ func (s *StorageService) findPrivateStorageByAlternateName(alternateName string)
 	return nil, fmt.Errorf("private storage with alternate name %s not found", alternateName)
 }
 
-func (s *StorageService) CreatePrivateStorage(privateStorage PrivateStorage) error {
-	_, err := s.findPrivateStorageByAlternateName(privateStorage.GetAlternateName())
-	if err == nil { // Means a storage with that alternateName was found
-		return fmt.Errorf("private storage with alternate name %s already exists", privateStorage.GetAlternateName())
+// HostNewClient creates a Private Storage in the Storage Service and
+// sets the client data en the "clients" vault of the Storage Service
+func (s *StorageService) HostNewClient(protectedClientData []byte, alternateName string) (errMsg string) {
+
+	configDatabaseName := alternateName + "_config"
+	documentDatabaseName := alternateName + "_documents"
+	retrievalPageSize := s.selfStorage.retrievalPageSize
+
+	err := s.CreatePrivateStorage(alternateName, configDatabaseName, documentDatabaseName, retrievalPageSize)
+	if err != nil {
+		return fmt.Sprint(err.Error())
+	}
+
+	// Unmarshal the byte array into EncryptedDocument
+	var encryptedDocument storageUtils.EncryptedDocument
+	err = json.Unmarshal(protectedClientData, &encryptedDocument)
+	if err != nil {
+		return fmt.Sprintf("Failed to unmarshal the client data received: %s", err.Error())
+	}
+
+	return fmt.Sprint(s.selfStorage.Put(VaultClients, encryptedDocument))
+}
+
+func (s *StorageService) CreatePrivateStorage(
+	alternateName string, configDatabaseName, documentDatabaseName string, retrievalPageSize uint,
+) error {
+	_, err := s.findPrivateStorageByAlternateName(alternateName)
+	if err != nil {
+		return err
+	}
+
+	configStore, err := s.storageProvider.OpenStore(configDatabaseName)
+	if err != nil {
+		return fmt.Errorf("failed to open configuration store: %w", err)
+	}
+
+	documentsStore, err := s.storageProvider.OpenStore(documentDatabaseName)
+	if err != nil {
+		return fmt.Errorf("failed to open document store: %w", err)
+	}
+
+	privateStorage := PrivateStorage{
+		configStore:       configStore,
+		documentsStore:    documentsStore,
+		retrievalPageSize: retrievalPageSize,
 	}
 
 	s.privateStorages = append(s.privateStorages, privateStorage)

@@ -7,7 +7,7 @@ const TestLocalHostPort = 8024
 var TestLocalHostUrl = "http://localhost:" + fmt.Sprint(TestLocalHostPort)
 
 var TestMongoConnStrWithoutPort = "mongodb://localhost" // no host port, no userpass
-var TestDocumentEDV1 = "edv-doc-id-1"
+var TestConfidentialDocumentId1 = "confidential-doc-id-1"
 
 // Note: lower case when creating the index
 var TestIndexAttributeNamedType = "type"
