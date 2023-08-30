@@ -17,8 +17,8 @@ var TestIndexAttributeNamedAlternateName = "alternateName"
 var TestIndexAttributeValueOrganizationType = "Organization"
 var TestIndexAttributeValueOccupationalCodeForDirectorICT = "1330"
 
-var TestAlternateNameValue1 = "alternate-name-1"
-var TestAlternateNameValue2 = "alternate-name-2"
+var TestOrgAlternateNameValue1 = "alternate-name-1"
+var TestOrgAlternateNameValue2 = "alternate-name-2"
 
 // HMAC Keys
 var TestHmacKeyForHost = "HmacKeyForHost"
