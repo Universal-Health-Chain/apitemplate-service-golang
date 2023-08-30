@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 const ApiSector = "healthcare" // "healthcare", "veterinary", "insurance" ...
@@ -20,6 +21,7 @@ type Route struct {
 
 func CreateRouter() *chi.Mux {
 	r := chi.NewRouter()
+	r.Handle("/metrics", promhttp.Handler())
 
 	routes := []Route{
 		{
