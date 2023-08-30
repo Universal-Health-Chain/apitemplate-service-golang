@@ -22,6 +22,7 @@ type Route struct {
 
 func CreateRouter() *chi.Mux {
 	r := chi.NewRouter()
+	r.Use(middleware.AllowContentType(supportedContentTypes...))
 	r.Use(middleware.RequestID)
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
