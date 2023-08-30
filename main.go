@@ -12,8 +12,6 @@ import (
 	"time"
 
 	"github.com/Universal-Health-Chain/common-utils-golang/storageUtils"
-	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/chi/v5/middleware"
 )
 
 // Note: the main function or test functions have to call envUtils.LoadEnv()
@@ -68,11 +66,6 @@ func main() {
 	envUtils.LoadEnv()
 	InitLogger()
 
-	// Initializing the Router for the API service
-	r := chi.NewRouter()
-	r.Use(middleware.Logger)
-	r.Use(middleware.Recoverer)
-
 	port := os.Getenv("HOST_LOCAL_PORT")
 	if port == "" {
 		port = "8024" //localhost
@@ -85,9 +78,7 @@ func main() {
 }
 
 func InitLogger() {
-
 	file, err := os.OpenFile(logFile, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
-
 	if err != nil {
 		log.Fatalln("Failed to open log file")
 	}
