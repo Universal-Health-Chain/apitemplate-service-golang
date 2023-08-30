@@ -20,14 +20,14 @@ WORKDIR /app
 COPY . .
 
 # Build the Go app
-RUN go build -o docs-service
+RUN go build -o apitemplate-service
 
 # Use a Docker multi-stage build to create a lean production image.
 # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
 FROM debian:12-slim
 
 # Copy the binary to the production image from the builder stage.
-COPY --from=builder /app/docs-service /docs-service
+COPY --from=builder /app/apitemplate-service /apitemplate-service
 
 # Expose port 8024 to the outside world
 EXPOSE 8024
@@ -35,4 +35,4 @@ EXPOSE 8024
 VOLUME [ "/logs" ]
 
 # Command to run the executable
-CMD ["/docs-service"]
+CMD ["/apitemplate-service"]
