@@ -17,17 +17,17 @@ func TestMongoDBStorage(t *testing.T) {
 		StorageURL:    "mongodb://admin:password@localhost:27017",
 		StoragePrefix: "prefix",
 	}
-	manager, err := NewStorageServicesManager("host", opts, 5)
+	manager, err := NewStorageServicesManager("org1", opts, 5)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	service, err := manager.GetStorageServiceByAlternateName("host")
+	service, err := manager.GetStorageServiceByAlternateName("org1")
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	errMsg := service.HostNewClient([]byte(testData.TestResourceObjectStringifiedToInitStorage1), "host")
+	errMsg := service.HostNewClient([]byte(testData.TestResourceObjectStringifiedToInitStorage1), "org1")
 	if errMsg != "" {
 		t.Fatal(errMsg)
 	}
@@ -42,17 +42,17 @@ func TestCouchDBStorage(t *testing.T) {
 		StorageURL:    "http://admin:password@localhost:5984",
 		StoragePrefix: "prefix",
 	}
-	manager, err := NewStorageServicesManager("host", opts, 5)
+	manager, err := NewStorageServicesManager("org2", opts, 5)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	service, err := manager.GetStorageServiceByAlternateName("host")
+	service, err := manager.GetStorageServiceByAlternateName("org2")
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	errMsg := service.HostNewClient([]byte(testData.TestResourceObjectStringifiedToInitStorage1), "host")
+	errMsg := service.HostNewClient([]byte(testData.TestResourceObjectStringifiedToInitStorage2), "org2")
 	if errMsg != "" {
 		t.Fatal(errMsg)
 	}
