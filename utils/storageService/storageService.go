@@ -70,16 +70,24 @@ func (s *StorageService) HostNewClient(protectedClientData []byte, alternateName
 		return fmt.Sprintf("Failed to unmarshal the client data received: %s", err.Error())
 	}
 
-	return fmt.Sprint(s.selfStorage.Put(VaultClients, encryptedDocument))
+	// s.selfStorage is nil and this fails
+	// return fmt.Sprint(s.selfStorage.Put(VaultClients, encryptedDocument))
+
+	err = s.privateStorages[0].Put(VaultClients, encryptedDocument)
+	if err != nil {
+		return err.Error()
+	}
+	return ""
 }
 
 func (s *StorageService) CreatePrivateStorage(
 	alternateName string, configDatabaseName, documentDatabaseName string, retrievalPageSize uint,
 ) error {
-	_, err := s.findPrivateStorageByAlternateName(alternateName)
-	if err != nil {
-		return err
-	}
+	// No PrivateStorage exists before we create one
+	// _, err := s.findPrivateStorageByAlternateName(alternateName)
+	// if err != nil {
+	// 	return err
+	// }
 
 	configStore, err := s.storageProvider.OpenStore(configDatabaseName)
 	if err != nil {

@@ -32,7 +32,7 @@ func HandlePostPrimaryDocToStore(w http.ResponseWriter, r *http.Request) {
 
 			// Convert primaryDoc to JWT and return as unsigned JWT
 			jwtPayload := map[string]interface{}{
-				"data": primaryDoc,
+				"body": primaryDoc,
 			}
 
 			// Convert primaryDoc to a stringified version for JWT

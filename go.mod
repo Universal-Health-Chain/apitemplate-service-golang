@@ -3,7 +3,7 @@ module apitemplate-service-golang
 go 1.21
 
 require (
-	github.com/Universal-Health-Chain/common-utils-golang v1.0.7
+	github.com/Universal-Health-Chain/common-utils-golang v1.0.8
 	github.com/go-chi/chi/v5 v5.0.10
 	github.com/hyperledger/aries-framework-go-ext/component/storage/mongodb v0.0.0-20230622181036-ef011d8df3d5
 	github.com/hyperledger/aries-framework-go/spi v0.0.0-20230815195733-cce322df1e8f

@@ -11,7 +11,7 @@ import (
 const ApiSector = "healthcare" // "healthcare", "veterinary", "insurance" ...
 
 // Supported content types and accepts
-var supportedContentTypes = []string{"json", "jwt", "jwm", "didcomm"}
+var supportedContentTypes = []string{"application/json", "jwt", "jwm", "didcomm/v2"}
 var supportedAccepts = append(supportedContentTypes) // Add any other accept types if required.
 
 type Route struct {
@@ -30,8 +30,9 @@ func CreateRouter() *chi.Mux {
 
 	routes := []Route{
 		{
+			// POST /host/cds-esp/v1/healthcare/org.schema/organization
 			Method:  "POST",
-			Url:     "/{vaultAlternateName}/cds-{territory}/{apiVersion}/{sector}/{specification}/connection/{connectionId}",
+			Url:     "/{vaultAlternateName}/cds-{territory}/{apiVersion}/{sector}/{specification}/{resourceType}",
 			Handler: HandlePostPrimaryDocToStore, // Changed to HandlePostPrimaryDocToVaultEDV
 		},
 	}

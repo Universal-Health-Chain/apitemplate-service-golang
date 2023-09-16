@@ -69,3 +69,9 @@ var TestResourceObjectStringifiedToInitStorage2 = `{
         }
     }]
 }`
+
+var TestPrimaryDocument = `{
+    "type": "Batch",
+    "data": {
+    }
+}`
