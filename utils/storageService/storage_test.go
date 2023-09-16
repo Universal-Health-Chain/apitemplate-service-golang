@@ -17,9 +17,7 @@ func TestMongoDBStorage(t *testing.T) {
 		StorageURL:    "mongodb://admin:password@localhost:27017",
 		StoragePrefix: "prefix",
 	}
-
-	manager := &StorageServicesManager{}
-	err := manager.CreateStorageService("host", opts, 5)
+	manager, err := NewStorageServicesManager("host", opts, 5)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -44,9 +42,7 @@ func TestCouchDBStorage(t *testing.T) {
 		StorageURL:    "http://admin:password@localhost:5984",
 		StoragePrefix: "prefix",
 	}
-
-	manager := &StorageServicesManager{}
-	err := manager.CreateStorageService("host", opts, 5)
+	manager, err := NewStorageServicesManager("host", opts, 5)
 	if err != nil {
 		t.Fatal(err)
 	}

@@ -10,21 +10,15 @@ type StorageServicesManager struct {
 	storageServices []*StorageService
 }
 
-// func NewStorageServicesManager(params storageUtils.StorageParameters) *StorageServicesManager {
-// 	manager := &StorageServicesManager{}
-// 	err := manager.CreateStorageService("host", params, 5)
-// 	if err != nil {
-// 		fmt.Println("Error creating storage service:", err)
-// 		return
-// 	}
+func NewStorageServicesManager(alternateName string, params storageUtils.StorageParameters, databaseTimeout uint64) (*StorageServicesManager, error) {
+	manager := &StorageServicesManager{}
 
-// 	service, err := manager.GetStorageServiceByAlternateName("host")
-// 	if err != nil {
-// 		fmt.Println("Error getting storage service:", err)
-// 		return
-// 	}
-// 	return nil
-// }
+	err := manager.CreateStorageService(alternateName, params, databaseTimeout)
+	if err != nil {
+		return nil, fmt.Errorf("Error creating storage service: %v", err)
+	}
+	return manager, nil
+}
 
 // CreateStorageService checks if the alternateName already exists in some selfStorage or privateStorages
 func (m *StorageServicesManager) CreateStorageService(alternateName string, parameters storageUtils.StorageParameters, databaseTimeout uint64) error {
